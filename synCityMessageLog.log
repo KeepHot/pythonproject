@@ -1,0 +1,1237 @@
+2022-03-15 11:52:01.307 | INFO     | __main__:<module>:39 - start-time: 2022-03-15 11:52:01.307250
+2022-03-15 11:52:01.308 | INFO     | __main__:<module>:48 - query data complete, city total size: 3
+2022-03-15 11:52:01.310 | ERROR    | __main__:<module>:75 - insert data failed, dataMsg: {'cityName': 'New York', 'stateName': 'NY', 'country': 'US', 'cityNameAlias': 'new york', 'stateNameAlias': 'ny', 'countryAlias': 'us', 'longitude': '-71.21313', 'latitude': '123.11', 'isValidGeographicMsg': 'true', 'createdTime': datetime.datetime(2022, 3, 14, 18, 7, 1), 'updatedTime': datetime.datetime(2022, 3, 14, 18, 7, 1), '_class': 'com.etekcity.cloud.openweatherservice.dto.mongodb.CityGeographyMsg', '_id': ObjectId('62300d6125dd73c604bbb5d9')}, exception:
+Traceback (most recent call last):
+
+> File "D:/pythonproject/maq.py", line 73, in <module>
+    geographyDB.insert_one(insert_data)
+    │           │          └ {'cityName': 'New York', 'stateName': 'NY', 'country': 'US', 'cityNameAlias': 'new york', 'stateNameAlias': 'ny', 'countryAli...
+    │           └ <function Collection.insert_one at 0x000002736DD8C0D0>
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 542, in insert_one
+    self._insert_one(
+    │    └ <function Collection._insert_one at 0x000002736DD8C040>
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 494, in _insert_one
+    self.__database.client._retryable_write(acknowledged, _insert_command, session)
+    │                                       │             │                └ None
+    │                                       │             └ <function Collection._insert_one.<locals>._insert_command at 0x000002736E2AF700>
+    │                                       └ True
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1386, in _retryable_write
+    return self._retry_with_session(retryable, func, s, None)
+           │    │                   │          │     └ <pymongo.client_session.ClientSession object at 0x000002736E2D3AF0>
+           │    │                   │          └ <function Collection._insert_one.<locals>._insert_command at 0x000002736E2AF700>
+           │    │                   └ True
+           │    └ <function MongoClient._retry_with_session at 0x000002736E25AAF0>
+           └ MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True)
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1274, in _retry_with_session
+    return self._retry_internal(retryable, func, session, bulk)
+           │    │               │          │     │        └ None
+           │    │               │          │     └ <pymongo.client_session.ClientSession object at 0x000002736E2D3AF0>
+           │    │               │          └ <function Collection._insert_one.<locals>._insert_command at 0x000002736E2AF700>
+           │    │               └ True
+           │    └ <function MongoClient._retry_internal at 0x000002736E25AB80>
+           └ MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True)
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1307, in _retry_internal
+    return func(session, sock_info, retryable)
+           │    │        │          └ False
+           │    │        └ SocketInfo(<socket.socket fd=2020, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 57...
+           │    └ <pymongo.client_session.ClientSession object at 0x000002736E2D3AF0>
+           └ <function Collection._insert_one.<locals>._insert_command at 0x000002736E2AF700>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 492, in _insert_command
+    _check_write_command_response(result)
+    │                             └ {'n': 0, 'writeErrors': [{'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': ...
+    └ <function _check_write_command_response at 0x000002736DCECC10>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\helpers.py", line 217, in _check_write_command_response
+    _raise_last_write_error(write_errors)
+    │                       └ [{'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNa...
+    └ <function _raise_last_write_error at 0x000002736DCECA60>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\helpers.py", line 189, in _raise_last_write_error
+    raise DuplicateKeyError(error.get("errmsg"), 11000, error)
+          │                 │     │                     └ {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNam...
+          │                 │     └ <method 'get' of 'dict' objects>
+          │                 └ {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNam...
+          └ <class 'pymongo.errors.DuplicateKeyError'>
+
+pymongo.errors.DuplicateKeyError: E11000 duplicate key error collection: weather.city_geography_msg index: uniqueIndex dup key: { cityNameAlias: "new york", stateNameAlias: "ny", countryAlias: "us" }, full error: {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNameAlias': 'new york', 'stateNameAlias': 'ny', 'countryAlias': 'us'}, 'errmsg': 'E11000 duplicate key error collection: weather.city_geography_msg index: uniqueIndex dup key: { cityNameAlias: "new york", stateNameAlias: "ny", countryAlias: "us" }'}
+2022-03-15 11:52:01.326 | ERROR    | __main__:<module>:75 - insert data failed, dataMsg: {'cityName': 'Los Angeles', 'stateName': 'CA', 'country': 'US', 'cityNameAlias': 'los angeles', 'stateNameAlias': 'ca', 'countryAlias': 'us', 'longitude': '-65.11', 'latitude': '110.24', 'isValidGeographicMsg': 'true', 'createdTime': datetime.datetime(2022, 3, 14, 18, 7, 42), 'updatedTime': datetime.datetime(2022, 3, 14, 18, 7, 42), '_class': 'com.etekcity.cloud.openweatherservice.dto.mongodb.CityGeographyMsg', '_id': ObjectId('62300d6125dd73c604bbb5da')}, exception:
+Traceback (most recent call last):
+
+> File "D:/pythonproject/maq.py", line 73, in <module>
+    geographyDB.insert_one(insert_data)
+    │           │          └ {'cityName': 'Los Angeles', 'stateName': 'CA', 'country': 'US', 'cityNameAlias': 'los angeles', 'stateNameAlias': 'ca', 'coun...
+    │           └ <function Collection.insert_one at 0x000002736DD8C0D0>
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 542, in insert_one
+    self._insert_one(
+    │    └ <function Collection._insert_one at 0x000002736DD8C040>
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 494, in _insert_one
+    self.__database.client._retryable_write(acknowledged, _insert_command, session)
+    │                                       │             │                └ None
+    │                                       │             └ <function Collection._insert_one.<locals>._insert_command at 0x000002736E2AF700>
+    │                                       └ True
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1386, in _retryable_write
+    return self._retry_with_session(retryable, func, s, None)
+           │    │                   │          │     └ <pymongo.client_session.ClientSession object at 0x000002736E2D3AC0>
+           │    │                   │          └ <function Collection._insert_one.<locals>._insert_command at 0x000002736E2AF700>
+           │    │                   └ True
+           │    └ <function MongoClient._retry_with_session at 0x000002736E25AAF0>
+           └ MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True)
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1274, in _retry_with_session
+    return self._retry_internal(retryable, func, session, bulk)
+           │    │               │          │     │        └ None
+           │    │               │          │     └ <pymongo.client_session.ClientSession object at 0x000002736E2D3AC0>
+           │    │               │          └ <function Collection._insert_one.<locals>._insert_command at 0x000002736E2AF700>
+           │    │               └ True
+           │    └ <function MongoClient._retry_internal at 0x000002736E25AB80>
+           └ MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True)
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1307, in _retry_internal
+    return func(session, sock_info, retryable)
+           │    │        │          └ False
+           │    │        └ SocketInfo(<socket.socket fd=2020, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 57...
+           │    └ <pymongo.client_session.ClientSession object at 0x000002736E2D3AC0>
+           └ <function Collection._insert_one.<locals>._insert_command at 0x000002736E2AF700>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 492, in _insert_command
+    _check_write_command_response(result)
+    │                             └ {'n': 0, 'writeErrors': [{'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': ...
+    └ <function _check_write_command_response at 0x000002736DCECC10>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\helpers.py", line 217, in _check_write_command_response
+    _raise_last_write_error(write_errors)
+    │                       └ [{'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNa...
+    └ <function _raise_last_write_error at 0x000002736DCECA60>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\helpers.py", line 189, in _raise_last_write_error
+    raise DuplicateKeyError(error.get("errmsg"), 11000, error)
+          │                 │     │                     └ {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNam...
+          │                 │     └ <method 'get' of 'dict' objects>
+          │                 └ {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNam...
+          └ <class 'pymongo.errors.DuplicateKeyError'>
+
+pymongo.errors.DuplicateKeyError: E11000 duplicate key error collection: weather.city_geography_msg index: uniqueIndex dup key: { cityNameAlias: "los angeles", stateNameAlias: "ca", countryAlias: "us" }, full error: {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNameAlias': 'los angeles', 'stateNameAlias': 'ca', 'countryAlias': 'us'}, 'errmsg': 'E11000 duplicate key error collection: weather.city_geography_msg index: uniqueIndex dup key: { cityNameAlias: "los angeles", stateNameAlias: "ca", countryAlias: "us" }'}
+2022-03-15 11:52:01.340 | ERROR    | __main__:<module>:75 - insert data failed, dataMsg: {'cityName': 'New York ', 'stateName': 'NewYorkState', 'country': 'US', 'cityNameAlias': 'new york', 'stateNameAlias': 'newyorkstate', 'countryAlias': 'us', 'longitude': '-70.123', 'latitude': '1223', 'isValidGeographicMsg': 'true', 'createdTime': datetime.datetime(2022, 3, 14, 18, 8, 49), 'updatedTime': datetime.datetime(2022, 3, 14, 18, 8, 49), '_class': 'com.etekcity.cloud.openweatherservice.dto.mongodb.CityGeographyMsg', '_id': ObjectId('62300d6125dd73c604bbb5db')}, exception:
+Traceback (most recent call last):
+
+> File "D:/pythonproject/maq.py", line 73, in <module>
+    geographyDB.insert_one(insert_data)
+    │           │          └ {'cityName': 'New York ', 'stateName': 'NewYorkState', 'country': 'US', 'cityNameAlias': 'new york', 'stateNameAlias': 'newyo...
+    │           └ <function Collection.insert_one at 0x000002736DD8C0D0>
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 542, in insert_one
+    self._insert_one(
+    │    └ <function Collection._insert_one at 0x000002736DD8C040>
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 494, in _insert_one
+    self.__database.client._retryable_write(acknowledged, _insert_command, session)
+    │                                       │             │                └ None
+    │                                       │             └ <function Collection._insert_one.<locals>._insert_command at 0x000002736E2AF8B0>
+    │                                       └ True
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1386, in _retryable_write
+    return self._retry_with_session(retryable, func, s, None)
+           │    │                   │          │     └ <pymongo.client_session.ClientSession object at 0x000002736E2D3E80>
+           │    │                   │          └ <function Collection._insert_one.<locals>._insert_command at 0x000002736E2AF8B0>
+           │    │                   └ True
+           │    └ <function MongoClient._retry_with_session at 0x000002736E25AAF0>
+           └ MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True)
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1274, in _retry_with_session
+    return self._retry_internal(retryable, func, session, bulk)
+           │    │               │          │     │        └ None
+           │    │               │          │     └ <pymongo.client_session.ClientSession object at 0x000002736E2D3E80>
+           │    │               │          └ <function Collection._insert_one.<locals>._insert_command at 0x000002736E2AF8B0>
+           │    │               └ True
+           │    └ <function MongoClient._retry_internal at 0x000002736E25AB80>
+           └ MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True)
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1307, in _retry_internal
+    return func(session, sock_info, retryable)
+           │    │        │          └ False
+           │    │        └ SocketInfo(<socket.socket fd=2020, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 57...
+           │    └ <pymongo.client_session.ClientSession object at 0x000002736E2D3E80>
+           └ <function Collection._insert_one.<locals>._insert_command at 0x000002736E2AF8B0>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 492, in _insert_command
+    _check_write_command_response(result)
+    │                             └ {'n': 0, 'writeErrors': [{'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': ...
+    └ <function _check_write_command_response at 0x000002736DCECC10>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\helpers.py", line 217, in _check_write_command_response
+    _raise_last_write_error(write_errors)
+    │                       └ [{'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNa...
+    └ <function _raise_last_write_error at 0x000002736DCECA60>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\helpers.py", line 189, in _raise_last_write_error
+    raise DuplicateKeyError(error.get("errmsg"), 11000, error)
+          │                 │     │                     └ {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNam...
+          │                 │     └ <method 'get' of 'dict' objects>
+          │                 └ {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNam...
+          └ <class 'pymongo.errors.DuplicateKeyError'>
+
+pymongo.errors.DuplicateKeyError: E11000 duplicate key error collection: weather.city_geography_msg index: uniqueIndex dup key: { cityNameAlias: "new york", stateNameAlias: "newyorkstate", countryAlias: "us" }, full error: {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNameAlias': 'new york', 'stateNameAlias': 'newyorkstate', 'countryAlias': 'us'}, 'errmsg': 'E11000 duplicate key error collection: weather.city_geography_msg index: uniqueIndex dup key: { cityNameAlias: "new york", stateNameAlias: "newyorkstate", countryAlias: "us" }'}
+2022-03-15 11:52:01.355 | INFO     | __main__:<module>:78 - syncCityMessage success,endTime:2022-03-15 11:52:01.355164
+2022-03-15 11:52:43.220 | INFO     | __main__:<module>:39 - start-time: 2022-03-15 11:52:43.220206
+2022-03-15 11:52:43.221 | INFO     | __main__:<module>:48 - query data complete, city total size: 3
+2022-03-15 11:52:43.223 | INFO     | __main__:<module>:78 - syncCityMessage success,endTime:2022-03-15 11:52:43.223203
+2022-03-15 12:09:52.221 | INFO     | __main__:<module>:39 - start-time: 2022-03-15 12:09:52.221977
+2022-03-15 12:09:52.276 | INFO     | __main__:<module>:48 - query data complete, city total size: 16
+2022-03-15 12:12:10.551 | INFO     | __main__:<module>:39 - start-time: 2022-03-15 12:12:10.551739
+2022-03-15 12:12:10.610 | INFO     | __main__:<module>:48 - query data complete, city total size: 16
+2022-03-15 12:12:10.613 | ERROR    | __main__:<module>:75 - insert data failed, dataMsg: {'cityName': 'Watsonville', 'stateName': 'California', 'country': 'United States', 'cityNameAlias': 'watsonville', 'stateNameAlias': 'california', 'countryAlias': 'united states', 'longitude': '-121.754757', 'latitude': '36.917927', 'isValidGeographicMsg': 'true', 'createdTime': datetime.datetime(2021, 8, 24, 9, 45, 52), 'updatedTime': datetime.datetime(2021, 8, 24, 9, 45, 52), '_class': 'com.etekcity.cloud.openweatherservice.dto.mongodb.CityGeographyMsg', '_id': ObjectId('6230121a87cab9794cbc442f')}, exception:
+Traceback (most recent call last):
+
+> File "D:/pythonproject/maq.py", line 73, in <module>
+    geographyDB.insert_one(insert_data)
+    │           │          └ {'cityName': 'Watsonville', 'stateName': 'California', 'country': 'United States', 'cityNameAlias': 'watsonville', 'stateName...
+    │           └ <function Collection.insert_one at 0x00000290926DA0D0>
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 542, in insert_one
+    self._insert_one(
+    │    └ <function Collection._insert_one at 0x00000290926DA040>
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 494, in _insert_one
+    self.__database.client._retryable_write(acknowledged, _insert_command, session)
+    │                                       │             │                └ None
+    │                                       │             └ <function Collection._insert_one.<locals>._insert_command at 0x00000290927E08B0>
+    │                                       └ True
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1386, in _retryable_write
+    return self._retry_with_session(retryable, func, s, None)
+           │    │                   │          │     └ <pymongo.client_session.ClientSession object at 0x0000029092803EE0>
+           │    │                   │          └ <function Collection._insert_one.<locals>._insert_command at 0x00000290927E08B0>
+           │    │                   └ True
+           │    └ <function MongoClient._retry_with_session at 0x000002909278AAF0>
+           └ MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True)
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1274, in _retry_with_session
+    return self._retry_internal(retryable, func, session, bulk)
+           │    │               │          │     │        └ None
+           │    │               │          │     └ <pymongo.client_session.ClientSession object at 0x0000029092803EE0>
+           │    │               │          └ <function Collection._insert_one.<locals>._insert_command at 0x00000290927E08B0>
+           │    │               └ True
+           │    └ <function MongoClient._retry_internal at 0x000002909278AB80>
+           └ MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True)
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1307, in _retry_internal
+    return func(session, sock_info, retryable)
+           │    │        │          └ False
+           │    │        └ SocketInfo(<socket.socket fd=1880, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 52...
+           │    └ <pymongo.client_session.ClientSession object at 0x0000029092803EE0>
+           └ <function Collection._insert_one.<locals>._insert_command at 0x00000290927E08B0>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 492, in _insert_command
+    _check_write_command_response(result)
+    │                             └ {'n': 0, 'writeErrors': [{'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': ...
+    └ <function _check_write_command_response at 0x000002909221CC10>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\helpers.py", line 217, in _check_write_command_response
+    _raise_last_write_error(write_errors)
+    │                       └ [{'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNa...
+    └ <function _raise_last_write_error at 0x000002909221CA60>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\helpers.py", line 189, in _raise_last_write_error
+    raise DuplicateKeyError(error.get("errmsg"), 11000, error)
+          │                 │     │                     └ {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNam...
+          │                 │     └ <method 'get' of 'dict' objects>
+          │                 └ {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNam...
+          └ <class 'pymongo.errors.DuplicateKeyError'>
+
+pymongo.errors.DuplicateKeyError: E11000 duplicate key error collection: weather.city_geography_msg index: uniqueIndex dup key: { cityNameAlias: "watsonville", stateNameAlias: "california", countryAlias: "united states" }, full error: {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNameAlias': 'watsonville', 'stateNameAlias': 'california', 'countryAlias': 'united states'}, 'errmsg': 'E11000 duplicate key error collection: weather.city_geography_msg index: uniqueIndex dup key: { cityNameAlias: "watsonville", stateNameAlias: "california", countryAlias: "united states" }'}
+2022-03-15 12:12:10.627 | ERROR    | __main__:<module>:75 - insert data failed, dataMsg: {'cityName': 'Bartow', 'stateName': 'Florida', 'country': 'United States', 'cityNameAlias': 'bartow', 'stateNameAlias': 'florida', 'countryAlias': 'united states', 'longitude': '27.899000', 'latitude': '-81.841000', 'isValidGeographicMsg': 'true', 'createdTime': datetime.datetime(2021, 8, 25, 8, 29, 9), 'updatedTime': datetime.datetime(2021, 8, 25, 8, 29, 9), '_class': 'com.etekcity.cloud.openweatherservice.dto.mongodb.CityGeographyMsg', '_id': ObjectId('6230121a87cab9794cbc4434')}, exception:
+Traceback (most recent call last):
+
+> File "D:/pythonproject/maq.py", line 73, in <module>
+    geographyDB.insert_one(insert_data)
+    │           │          └ {'cityName': 'Bartow', 'stateName': 'Florida', 'country': 'United States', 'cityNameAlias': 'bartow', 'stateNameAlias': 'flor...
+    │           └ <function Collection.insert_one at 0x00000290926DA0D0>
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 542, in insert_one
+    self._insert_one(
+    │    └ <function Collection._insert_one at 0x00000290926DA040>
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 494, in _insert_one
+    self.__database.client._retryable_write(acknowledged, _insert_command, session)
+    │                                       │             │                └ None
+    │                                       │             └ <function Collection._insert_one.<locals>._insert_command at 0x00000290927E08B0>
+    │                                       └ True
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1386, in _retryable_write
+    return self._retry_with_session(retryable, func, s, None)
+           │    │                   │          │     └ <pymongo.client_session.ClientSession object at 0x0000029092803EE0>
+           │    │                   │          └ <function Collection._insert_one.<locals>._insert_command at 0x00000290927E08B0>
+           │    │                   └ True
+           │    └ <function MongoClient._retry_with_session at 0x000002909278AAF0>
+           └ MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True)
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1274, in _retry_with_session
+    return self._retry_internal(retryable, func, session, bulk)
+           │    │               │          │     │        └ None
+           │    │               │          │     └ <pymongo.client_session.ClientSession object at 0x0000029092803EE0>
+           │    │               │          └ <function Collection._insert_one.<locals>._insert_command at 0x00000290927E08B0>
+           │    │               └ True
+           │    └ <function MongoClient._retry_internal at 0x000002909278AB80>
+           └ MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True)
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1307, in _retry_internal
+    return func(session, sock_info, retryable)
+           │    │        │          └ False
+           │    │        └ SocketInfo(<socket.socket fd=1880, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 52...
+           │    └ <pymongo.client_session.ClientSession object at 0x0000029092803EE0>
+           └ <function Collection._insert_one.<locals>._insert_command at 0x00000290927E08B0>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 492, in _insert_command
+    _check_write_command_response(result)
+    │                             └ {'n': 0, 'writeErrors': [{'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': ...
+    └ <function _check_write_command_response at 0x000002909221CC10>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\helpers.py", line 217, in _check_write_command_response
+    _raise_last_write_error(write_errors)
+    │                       └ [{'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNa...
+    └ <function _raise_last_write_error at 0x000002909221CA60>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\helpers.py", line 189, in _raise_last_write_error
+    raise DuplicateKeyError(error.get("errmsg"), 11000, error)
+          │                 │     │                     └ {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNam...
+          │                 │     └ <method 'get' of 'dict' objects>
+          │                 └ {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNam...
+          └ <class 'pymongo.errors.DuplicateKeyError'>
+
+pymongo.errors.DuplicateKeyError: E11000 duplicate key error collection: weather.city_geography_msg index: uniqueIndex dup key: { cityNameAlias: "bartow", stateNameAlias: "florida", countryAlias: "united states" }, full error: {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNameAlias': 'bartow', 'stateNameAlias': 'florida', 'countryAlias': 'united states'}, 'errmsg': 'E11000 duplicate key error collection: weather.city_geography_msg index: uniqueIndex dup key: { cityNameAlias: "bartow", stateNameAlias: "florida", countryAlias: "united states" }'}
+2022-03-15 12:12:10.642 | ERROR    | __main__:<module>:75 - insert data failed, dataMsg: {'cityName': 'Bartow', 'stateName': 'Florida', 'country': 'United States', 'cityNameAlias': 'bartow', 'stateNameAlias': 'florida', 'countryAlias': 'united states', 'longitude': '-123.329497', 'latitude': '40.739919', 'isValidGeographicMsg': 'true', 'createdTime': datetime.datetime(2021, 9, 17, 7, 48, 21), 'updatedTime': datetime.datetime(2021, 9, 17, 7, 48, 21), '_class': 'com.etekcity.cloud.openweatherservice.dto.mongodb.CityGeographyMsg', '_id': ObjectId('6230121a87cab9794cbc4436')}, exception:
+Traceback (most recent call last):
+
+> File "D:/pythonproject/maq.py", line 73, in <module>
+    geographyDB.insert_one(insert_data)
+    │           │          └ {'cityName': 'Bartow', 'stateName': 'Florida', 'country': 'United States', 'cityNameAlias': 'bartow', 'stateNameAlias': 'flor...
+    │           └ <function Collection.insert_one at 0x00000290926DA0D0>
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 542, in insert_one
+    self._insert_one(
+    │    └ <function Collection._insert_one at 0x00000290926DA040>
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 494, in _insert_one
+    self.__database.client._retryable_write(acknowledged, _insert_command, session)
+    │                                       │             │                └ None
+    │                                       │             └ <function Collection._insert_one.<locals>._insert_command at 0x00000290927E0700>
+    │                                       └ True
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1386, in _retryable_write
+    return self._retry_with_session(retryable, func, s, None)
+           │    │                   │          │     └ <pymongo.client_session.ClientSession object at 0x000002909281D3A0>
+           │    │                   │          └ <function Collection._insert_one.<locals>._insert_command at 0x00000290927E0700>
+           │    │                   └ True
+           │    └ <function MongoClient._retry_with_session at 0x000002909278AAF0>
+           └ MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True)
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1274, in _retry_with_session
+    return self._retry_internal(retryable, func, session, bulk)
+           │    │               │          │     │        └ None
+           │    │               │          │     └ <pymongo.client_session.ClientSession object at 0x000002909281D3A0>
+           │    │               │          └ <function Collection._insert_one.<locals>._insert_command at 0x00000290927E0700>
+           │    │               └ True
+           │    └ <function MongoClient._retry_internal at 0x000002909278AB80>
+           └ MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True)
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1307, in _retry_internal
+    return func(session, sock_info, retryable)
+           │    │        │          └ False
+           │    │        └ SocketInfo(<socket.socket fd=1880, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 52...
+           │    └ <pymongo.client_session.ClientSession object at 0x000002909281D3A0>
+           └ <function Collection._insert_one.<locals>._insert_command at 0x00000290927E0700>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 492, in _insert_command
+    _check_write_command_response(result)
+    │                             └ {'n': 0, 'writeErrors': [{'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': ...
+    └ <function _check_write_command_response at 0x000002909221CC10>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\helpers.py", line 217, in _check_write_command_response
+    _raise_last_write_error(write_errors)
+    │                       └ [{'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNa...
+    └ <function _raise_last_write_error at 0x000002909221CA60>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\helpers.py", line 189, in _raise_last_write_error
+    raise DuplicateKeyError(error.get("errmsg"), 11000, error)
+          │                 │     │                     └ {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNam...
+          │                 │     └ <method 'get' of 'dict' objects>
+          │                 └ {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNam...
+          └ <class 'pymongo.errors.DuplicateKeyError'>
+
+pymongo.errors.DuplicateKeyError: E11000 duplicate key error collection: weather.city_geography_msg index: uniqueIndex dup key: { cityNameAlias: "bartow", stateNameAlias: "florida", countryAlias: "united states" }, full error: {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNameAlias': 'bartow', 'stateNameAlias': 'florida', 'countryAlias': 'united states'}, 'errmsg': 'E11000 duplicate key error collection: weather.city_geography_msg index: uniqueIndex dup key: { cityNameAlias: "bartow", stateNameAlias: "florida", countryAlias: "united states" }'}
+2022-03-15 12:12:10.658 | ERROR    | __main__:<module>:75 - insert data failed, dataMsg: {'cityName': 'Beijing', 'stateName': 'Beijing', 'country': 'China', 'cityNameAlias': 'beijing', 'stateNameAlias': 'beijing', 'countryAlias': 'china', 'longitude': '125.500067', 'latitude': '35.260444', 'isValidGeographicMsg': 'true', 'createdTime': datetime.datetime(2022, 2, 24, 8, 35, 56), 'updatedTime': datetime.datetime(2022, 2, 24, 8, 35, 56), '_class': 'com.etekcity.cloud.openweatherservice.dto.mongodb.CityGeographyMsg', '_id': ObjectId('6230121a87cab9794cbc4439')}, exception:
+Traceback (most recent call last):
+
+> File "D:/pythonproject/maq.py", line 73, in <module>
+    geographyDB.insert_one(insert_data)
+    │           │          └ {'cityName': 'Beijing', 'stateName': 'Beijing', 'country': 'China', 'cityNameAlias': 'beijing', 'stateNameAlias': 'beijing', ...
+    │           └ <function Collection.insert_one at 0x00000290926DA0D0>
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 542, in insert_one
+    self._insert_one(
+    │    └ <function Collection._insert_one at 0x00000290926DA040>
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 494, in _insert_one
+    self.__database.client._retryable_write(acknowledged, _insert_command, session)
+    │                                       │             │                └ None
+    │                                       │             └ <function Collection._insert_one.<locals>._insert_command at 0x0000029092970940>
+    │                                       └ True
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1386, in _retryable_write
+    return self._retry_with_session(retryable, func, s, None)
+           │    │                   │          │     └ <pymongo.client_session.ClientSession object at 0x000002909281D640>
+           │    │                   │          └ <function Collection._insert_one.<locals>._insert_command at 0x0000029092970940>
+           │    │                   └ True
+           │    └ <function MongoClient._retry_with_session at 0x000002909278AAF0>
+           └ MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True)
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1274, in _retry_with_session
+    return self._retry_internal(retryable, func, session, bulk)
+           │    │               │          │     │        └ None
+           │    │               │          │     └ <pymongo.client_session.ClientSession object at 0x000002909281D640>
+           │    │               │          └ <function Collection._insert_one.<locals>._insert_command at 0x0000029092970940>
+           │    │               └ True
+           │    └ <function MongoClient._retry_internal at 0x000002909278AB80>
+           └ MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True)
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1307, in _retry_internal
+    return func(session, sock_info, retryable)
+           │    │        │          └ False
+           │    │        └ SocketInfo(<socket.socket fd=1880, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 52...
+           │    └ <pymongo.client_session.ClientSession object at 0x000002909281D640>
+           └ <function Collection._insert_one.<locals>._insert_command at 0x0000029092970940>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 492, in _insert_command
+    _check_write_command_response(result)
+    │                             └ {'n': 0, 'writeErrors': [{'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': ...
+    └ <function _check_write_command_response at 0x000002909221CC10>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\helpers.py", line 217, in _check_write_command_response
+    _raise_last_write_error(write_errors)
+    │                       └ [{'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNa...
+    └ <function _raise_last_write_error at 0x000002909221CA60>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\helpers.py", line 189, in _raise_last_write_error
+    raise DuplicateKeyError(error.get("errmsg"), 11000, error)
+          │                 │     │                     └ {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNam...
+          │                 │     └ <method 'get' of 'dict' objects>
+          │                 └ {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNam...
+          └ <class 'pymongo.errors.DuplicateKeyError'>
+
+pymongo.errors.DuplicateKeyError: E11000 duplicate key error collection: weather.city_geography_msg index: uniqueIndex dup key: { cityNameAlias: "beijing", stateNameAlias: "beijing", countryAlias: "china" }, full error: {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNameAlias': 'beijing', 'stateNameAlias': 'beijing', 'countryAlias': 'china'}, 'errmsg': 'E11000 duplicate key error collection: weather.city_geography_msg index: uniqueIndex dup key: { cityNameAlias: "beijing", stateNameAlias: "beijing", countryAlias: "china" }'}
+2022-03-15 12:12:10.672 | ERROR    | __main__:<module>:75 - insert data failed, dataMsg: {'cityName': 'Beijing', 'stateName': 'Beijing', 'country': 'China', 'cityNameAlias': 'beijing', 'stateNameAlias': 'beijing', 'countryAlias': 'china', 'longitude': '74.000067', 'latitude': '40.430444', 'isValidGeographicMsg': 'true', 'createdTime': datetime.datetime(2022, 2, 24, 9, 6, 46), 'updatedTime': datetime.datetime(2022, 2, 24, 9, 6, 46), '_class': 'com.etekcity.cloud.openweatherservice.dto.mongodb.CityGeographyMsg', '_id': ObjectId('6230121a87cab9794cbc443a')}, exception:
+Traceback (most recent call last):
+
+> File "D:/pythonproject/maq.py", line 73, in <module>
+    geographyDB.insert_one(insert_data)
+    │           │          └ {'cityName': 'Beijing', 'stateName': 'Beijing', 'country': 'China', 'cityNameAlias': 'beijing', 'stateNameAlias': 'beijing', ...
+    │           └ <function Collection.insert_one at 0x00000290926DA0D0>
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 542, in insert_one
+    self._insert_one(
+    │    └ <function Collection._insert_one at 0x00000290926DA040>
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 494, in _insert_one
+    self.__database.client._retryable_write(acknowledged, _insert_command, session)
+    │                                       │             │                └ None
+    │                                       │             └ <function Collection._insert_one.<locals>._insert_command at 0x00000290929709D0>
+    │                                       └ True
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1386, in _retryable_write
+    return self._retry_with_session(retryable, func, s, None)
+           │    │                   │          │     └ <pymongo.client_session.ClientSession object at 0x000002909281D7F0>
+           │    │                   │          └ <function Collection._insert_one.<locals>._insert_command at 0x00000290929709D0>
+           │    │                   └ True
+           │    └ <function MongoClient._retry_with_session at 0x000002909278AAF0>
+           └ MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True)
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1274, in _retry_with_session
+    return self._retry_internal(retryable, func, session, bulk)
+           │    │               │          │     │        └ None
+           │    │               │          │     └ <pymongo.client_session.ClientSession object at 0x000002909281D7F0>
+           │    │               │          └ <function Collection._insert_one.<locals>._insert_command at 0x00000290929709D0>
+           │    │               └ True
+           │    └ <function MongoClient._retry_internal at 0x000002909278AB80>
+           └ MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True)
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1307, in _retry_internal
+    return func(session, sock_info, retryable)
+           │    │        │          └ False
+           │    │        └ SocketInfo(<socket.socket fd=1880, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 52...
+           │    └ <pymongo.client_session.ClientSession object at 0x000002909281D7F0>
+           └ <function Collection._insert_one.<locals>._insert_command at 0x00000290929709D0>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 492, in _insert_command
+    _check_write_command_response(result)
+    │                             └ {'n': 0, 'writeErrors': [{'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': ...
+    └ <function _check_write_command_response at 0x000002909221CC10>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\helpers.py", line 217, in _check_write_command_response
+    _raise_last_write_error(write_errors)
+    │                       └ [{'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNa...
+    └ <function _raise_last_write_error at 0x000002909221CA60>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\helpers.py", line 189, in _raise_last_write_error
+    raise DuplicateKeyError(error.get("errmsg"), 11000, error)
+          │                 │     │                     └ {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNam...
+          │                 │     └ <method 'get' of 'dict' objects>
+          │                 └ {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNam...
+          └ <class 'pymongo.errors.DuplicateKeyError'>
+
+pymongo.errors.DuplicateKeyError: E11000 duplicate key error collection: weather.city_geography_msg index: uniqueIndex dup key: { cityNameAlias: "beijing", stateNameAlias: "beijing", countryAlias: "china" }, full error: {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNameAlias': 'beijing', 'stateNameAlias': 'beijing', 'countryAlias': 'china'}, 'errmsg': 'E11000 duplicate key error collection: weather.city_geography_msg index: uniqueIndex dup key: { cityNameAlias: "beijing", stateNameAlias: "beijing", countryAlias: "china" }'}
+2022-03-15 12:12:10.686 | INFO     | __main__:<module>:78 - syncCityMessage success,endTime:2022-03-15 12:12:10.686198
+2022-03-15 15:51:19.465 | INFO     | __main__:<module>:31 - start-syncDistinctCityMessage-time: 2022-03-15 15:51:19.465200
+2022-03-15 15:51:19.470 | INFO     | __main__:<module>:39 - query data complete, city total size: 2
+2022-03-15 15:51:29.976 | INFO     | __main__:<module>:31 - start-syncDistinctCityMessage-time: 2022-03-15 15:51:29.976968
+2022-03-15 15:51:29.982 | INFO     | __main__:<module>:39 - query data complete, city total size: 2
+2022-03-15 15:52:21.664 | INFO     | __main__:<module>:31 - start-syncDistinctCityMessage-time: 2022-03-15 15:52:21.664543
+2022-03-15 15:54:39.149 | INFO     | __main__:<module>:31 - start-syncDistinctCityMessage-time: 2022-03-15 15:54:39.149240
+2022-03-15 15:54:39.225 | INFO     | __main__:<module>:39 - query data complete, city total size: 3
+2022-03-15 15:58:41.234 | INFO     | __main__:<module>:31 - start-syncDistinctCityMessage-time: 2022-03-15 15:58:41.234170
+2022-03-15 15:58:41.284 | INFO     | __main__:<module>:39 - query data complete, city total size: 3
+2022-03-15 15:58:41.288 | INFO     | __main__:<module>:69 - syncDistinctCityMessage success,endTime:2022-03-15 15:58:41.288787
+2022-03-15 15:58:41.288 | INFO     | __main__:<module>:71 - start-syncNotDistinctCityMessage-time: 2022-03-15 15:58:41.288787
+2022-03-15 15:58:41.335 | INFO     | __main__:<module>:78 - query data complete, city total size: 8
+2022-03-15 15:58:41.339 | INFO     | __main__:<module>:109 - syncNotDistinctCityMessage success,endTime:2022-03-15 15:58:41.339833
+2022-03-15 16:15:35.925 | INFO     | __main__:<module>:31 - start-syncDistinctCityMessage-time: 2022-03-15 16:15:35.925543
+2022-03-15 16:15:35.977 | INFO     | __main__:<module>:39 - query distinctByUpdateTime data complete, city total size: 3
+2022-03-15 16:15:35.979 | ERROR    | __main__:<module>:66 - insert data failed, dataMsg: {'cityName': 'Bartow', 'stateName': 'Florida', 'country': 'United States', 'cityNameAlias': 'bartow', 'stateNameAlias': 'florida', 'countryAlias': 'united states', 'longitude': '-81.841000', 'latitude': '27.899000', 'isValidGeographicMsg': 'true', 'createdTime': datetime.datetime(2021, 8, 25, 2, 35, 1), 'updatedTime': datetime.datetime(2021, 9, 17, 7, 48, 21), '_class': 'com.etekcity.cloud.openweatherservice.dto.mongodb.CityGeographyMsg', '_id': ObjectId('62304b27a8b9a4d4b1e423b6')}, exception:
+Traceback (most recent call last):
+
+> File "D:/pythonproject/maq.py", line 64, in <module>
+    geographyDB.insert_one(insert_data)
+    │           │          └ {'cityName': 'Bartow', 'stateName': 'Florida', 'country': 'United States', 'cityNameAlias': 'bartow', 'stateNameAlias': 'flor...
+    │           └ <function Collection.insert_one at 0x0000011404BC20D0>
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 542, in insert_one
+    self._insert_one(
+    │    └ <function Collection._insert_one at 0x0000011404BC2040>
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 494, in _insert_one
+    self.__database.client._retryable_write(acknowledged, _insert_command, session)
+    │                                       │             │                └ None
+    │                                       │             └ <function Collection._insert_one.<locals>._insert_command at 0x0000011404CC0AF0>
+    │                                       └ True
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1386, in _retryable_write
+    return self._retry_with_session(retryable, func, s, None)
+           │    │                   │          │     └ <pymongo.client_session.ClientSession object at 0x0000011404CE4970>
+           │    │                   │          └ <function Collection._insert_one.<locals>._insert_command at 0x0000011404CC0AF0>
+           │    │                   └ True
+           │    └ <function MongoClient._retry_with_session at 0x0000011404C6AAF0>
+           └ MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True)
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1274, in _retry_with_session
+    return self._retry_internal(retryable, func, session, bulk)
+           │    │               │          │     │        └ None
+           │    │               │          │     └ <pymongo.client_session.ClientSession object at 0x0000011404CE4970>
+           │    │               │          └ <function Collection._insert_one.<locals>._insert_command at 0x0000011404CC0AF0>
+           │    │               └ True
+           │    └ <function MongoClient._retry_internal at 0x0000011404C6AB80>
+           └ MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True)
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1307, in _retry_internal
+    return func(session, sock_info, retryable)
+           │    │        │          └ False
+           │    │        └ SocketInfo(<socket.socket fd=2172, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 59...
+           │    └ <pymongo.client_session.ClientSession object at 0x0000011404CE4970>
+           └ <function Collection._insert_one.<locals>._insert_command at 0x0000011404CC0AF0>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 492, in _insert_command
+    _check_write_command_response(result)
+    │                             └ {'n': 0, 'writeErrors': [{'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': ...
+    └ <function _check_write_command_response at 0x00000114046FCC10>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\helpers.py", line 217, in _check_write_command_response
+    _raise_last_write_error(write_errors)
+    │                       └ [{'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNa...
+    └ <function _raise_last_write_error at 0x00000114046FCA60>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\helpers.py", line 189, in _raise_last_write_error
+    raise DuplicateKeyError(error.get("errmsg"), 11000, error)
+          │                 │     │                     └ {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNam...
+          │                 │     └ <method 'get' of 'dict' objects>
+          │                 └ {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNam...
+          └ <class 'pymongo.errors.DuplicateKeyError'>
+
+pymongo.errors.DuplicateKeyError: E11000 duplicate key error collection: weather.city_geography_msg index: uniqueIndex dup key: { cityNameAlias: "bartow", stateNameAlias: "florida", countryAlias: "united states" }, full error: {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNameAlias': 'bartow', 'stateNameAlias': 'florida', 'countryAlias': 'united states'}, 'errmsg': 'E11000 duplicate key error collection: weather.city_geography_msg index: uniqueIndex dup key: { cityNameAlias: "bartow", stateNameAlias: "florida", countryAlias: "united states" }'}
+2022-03-15 16:15:35.991 | ERROR    | __main__:<module>:66 - insert data failed, dataMsg: {'cityName': 'Beijing', 'stateName': 'Beijing', 'country': 'China', 'cityNameAlias': 'beijing', 'stateNameAlias': 'beijing', 'countryAlias': 'china', 'longitude': '121.500067', 'latitude': '31.260444', 'isValidGeographicMsg': 'true', 'createdTime': datetime.datetime(2021, 8, 25, 2, 34, 53), 'updatedTime': datetime.datetime(2022, 2, 24, 9, 6, 46), '_class': 'com.etekcity.cloud.openweatherservice.dto.mongodb.CityGeographyMsg', '_id': ObjectId('62304b27a8b9a4d4b1e423b7')}, exception:
+Traceback (most recent call last):
+
+> File "D:/pythonproject/maq.py", line 64, in <module>
+    geographyDB.insert_one(insert_data)
+    │           │          └ {'cityName': 'Beijing', 'stateName': 'Beijing', 'country': 'China', 'cityNameAlias': 'beijing', 'stateNameAlias': 'beijing', ...
+    │           └ <function Collection.insert_one at 0x0000011404BC20D0>
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 542, in insert_one
+    self._insert_one(
+    │    └ <function Collection._insert_one at 0x0000011404BC2040>
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 494, in _insert_one
+    self.__database.client._retryable_write(acknowledged, _insert_command, session)
+    │                                       │             │                └ None
+    │                                       │             └ <function Collection._insert_one.<locals>._insert_command at 0x0000011404CC0AF0>
+    │                                       └ True
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1386, in _retryable_write
+    return self._retry_with_session(retryable, func, s, None)
+           │    │                   │          │     └ <pymongo.client_session.ClientSession object at 0x0000011404CE4940>
+           │    │                   │          └ <function Collection._insert_one.<locals>._insert_command at 0x0000011404CC0AF0>
+           │    │                   └ True
+           │    └ <function MongoClient._retry_with_session at 0x0000011404C6AAF0>
+           └ MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True)
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1274, in _retry_with_session
+    return self._retry_internal(retryable, func, session, bulk)
+           │    │               │          │     │        └ None
+           │    │               │          │     └ <pymongo.client_session.ClientSession object at 0x0000011404CE4940>
+           │    │               │          └ <function Collection._insert_one.<locals>._insert_command at 0x0000011404CC0AF0>
+           │    │               └ True
+           │    └ <function MongoClient._retry_internal at 0x0000011404C6AB80>
+           └ MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True)
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1307, in _retry_internal
+    return func(session, sock_info, retryable)
+           │    │        │          └ False
+           │    │        └ SocketInfo(<socket.socket fd=2172, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 59...
+           │    └ <pymongo.client_session.ClientSession object at 0x0000011404CE4940>
+           └ <function Collection._insert_one.<locals>._insert_command at 0x0000011404CC0AF0>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 492, in _insert_command
+    _check_write_command_response(result)
+    │                             └ {'n': 0, 'writeErrors': [{'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': ...
+    └ <function _check_write_command_response at 0x00000114046FCC10>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\helpers.py", line 217, in _check_write_command_response
+    _raise_last_write_error(write_errors)
+    │                       └ [{'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNa...
+    └ <function _raise_last_write_error at 0x00000114046FCA60>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\helpers.py", line 189, in _raise_last_write_error
+    raise DuplicateKeyError(error.get("errmsg"), 11000, error)
+          │                 │     │                     └ {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNam...
+          │                 │     └ <method 'get' of 'dict' objects>
+          │                 └ {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNam...
+          └ <class 'pymongo.errors.DuplicateKeyError'>
+
+pymongo.errors.DuplicateKeyError: E11000 duplicate key error collection: weather.city_geography_msg index: uniqueIndex dup key: { cityNameAlias: "beijing", stateNameAlias: "beijing", countryAlias: "china" }, full error: {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNameAlias': 'beijing', 'stateNameAlias': 'beijing', 'countryAlias': 'china'}, 'errmsg': 'E11000 duplicate key error collection: weather.city_geography_msg index: uniqueIndex dup key: { cityNameAlias: "beijing", stateNameAlias: "beijing", countryAlias: "china" }'}
+2022-03-15 16:15:36.007 | ERROR    | __main__:<module>:66 - insert data failed, dataMsg: {'cityName': 'Watsonville', 'stateName': 'California', 'country': 'United States', 'cityNameAlias': 'watsonville', 'stateNameAlias': 'california', 'countryAlias': 'united states', 'longitude': '-92.764051', 'latitude': '46.455008', 'isValidGeographicMsg': 'true', 'createdTime': datetime.datetime(2021, 7, 28, 11, 55, 33), 'updatedTime': datetime.datetime(2021, 10, 13, 6, 33, 57), '_class': 'com.etekcity.cloud.openweatherservice.dto.mongodb.CityGeographyMsg', '_id': ObjectId('62304b28a8b9a4d4b1e423b8')}, exception:
+Traceback (most recent call last):
+
+> File "D:/pythonproject/maq.py", line 64, in <module>
+    geographyDB.insert_one(insert_data)
+    │           │          └ {'cityName': 'Watsonville', 'stateName': 'California', 'country': 'United States', 'cityNameAlias': 'watsonville', 'stateName...
+    │           └ <function Collection.insert_one at 0x0000011404BC20D0>
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 542, in insert_one
+    self._insert_one(
+    │    └ <function Collection._insert_one at 0x0000011404BC2040>
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 494, in _insert_one
+    self.__database.client._retryable_write(acknowledged, _insert_command, session)
+    │                                       │             │                └ None
+    │                                       │             └ <function Collection._insert_one.<locals>._insert_command at 0x0000011404CC0C10>
+    │                                       └ True
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1386, in _retryable_write
+    return self._retry_with_session(retryable, func, s, None)
+           │    │                   │          │     └ <pymongo.client_session.ClientSession object at 0x0000011404CE4D00>
+           │    │                   │          └ <function Collection._insert_one.<locals>._insert_command at 0x0000011404CC0C10>
+           │    │                   └ True
+           │    └ <function MongoClient._retry_with_session at 0x0000011404C6AAF0>
+           └ MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True)
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1274, in _retry_with_session
+    return self._retry_internal(retryable, func, session, bulk)
+           │    │               │          │     │        └ None
+           │    │               │          │     └ <pymongo.client_session.ClientSession object at 0x0000011404CE4D00>
+           │    │               │          └ <function Collection._insert_one.<locals>._insert_command at 0x0000011404CC0C10>
+           │    │               └ True
+           │    └ <function MongoClient._retry_internal at 0x0000011404C6AB80>
+           └ MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True)
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1307, in _retry_internal
+    return func(session, sock_info, retryable)
+           │    │        │          └ False
+           │    │        └ SocketInfo(<socket.socket fd=2172, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 59...
+           │    └ <pymongo.client_session.ClientSession object at 0x0000011404CE4D00>
+           └ <function Collection._insert_one.<locals>._insert_command at 0x0000011404CC0C10>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 492, in _insert_command
+    _check_write_command_response(result)
+    │                             └ {'n': 0, 'writeErrors': [{'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': ...
+    └ <function _check_write_command_response at 0x00000114046FCC10>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\helpers.py", line 217, in _check_write_command_response
+    _raise_last_write_error(write_errors)
+    │                       └ [{'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNa...
+    └ <function _raise_last_write_error at 0x00000114046FCA60>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\helpers.py", line 189, in _raise_last_write_error
+    raise DuplicateKeyError(error.get("errmsg"), 11000, error)
+          │                 │     │                     └ {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNam...
+          │                 │     └ <method 'get' of 'dict' objects>
+          │                 └ {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNam...
+          └ <class 'pymongo.errors.DuplicateKeyError'>
+
+pymongo.errors.DuplicateKeyError: E11000 duplicate key error collection: weather.city_geography_msg index: uniqueIndex dup key: { cityNameAlias: "watsonville", stateNameAlias: "california", countryAlias: "united states" }, full error: {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNameAlias': 'watsonville', 'stateNameAlias': 'california', 'countryAlias': 'united states'}, 'errmsg': 'E11000 duplicate key error collection: weather.city_geography_msg index: uniqueIndex dup key: { cityNameAlias: "watsonville", stateNameAlias: "california", countryAlias: "united states" }'}
+2022-03-15 16:15:36.021 | INFO     | __main__:<module>:69 - syncDistinctCityMessage success,endTime:2022-03-15 16:15:36.021128
+2022-03-15 16:15:36.021 | INFO     | __main__:<module>:71 - start-syncNotDistinctCityMessage-time: 2022-03-15 16:15:36.021128
+2022-03-15 16:15:36.087 | INFO     | __main__:<module>:78 - query data no distinct complete, city total size: 8
+2022-03-15 16:15:36.088 | ERROR    | __main__:<module>:105 - insert data failed, dataMsg: {'cityName': 'Washoe County', 'stateName': 'Nevada', 'country': 'US', 'cityNameAlias': 'washoe county', 'stateNameAlias': 'nevada', 'countryAlias': 'us', 'longitude': '-119.984654', 'latitude': '41.478657', 'isValidGeographicMsg': 'true', 'createdTime': datetime.datetime(2021, 8, 6, 7, 31, 1), 'updatedTime': datetime.datetime(2021, 8, 21, 10, 15, 17), '_class': 'com.etekcity.cloud.openweatherservice.dto.mongodb.CityGeographyMsg', '_id': ObjectId('62304b28a8b9a4d4b1e423b9')}, exception:
+Traceback (most recent call last):
+
+> File "D:/pythonproject/maq.py", line 103, in <module>
+    geographyDB.insert_one(insert_data)
+    │           │          └ {'cityName': 'Washoe County', 'stateName': 'Nevada', 'country': 'US', 'cityNameAlias': 'washoe county', 'stateNameAlias': 'ne...
+    │           └ <function Collection.insert_one at 0x0000011404BC20D0>
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 542, in insert_one
+    self._insert_one(
+    │    └ <function Collection._insert_one at 0x0000011404BC2040>
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 494, in _insert_one
+    self.__database.client._retryable_write(acknowledged, _insert_command, session)
+    │                                       │             │                └ None
+    │                                       │             └ <function Collection._insert_one.<locals>._insert_command at 0x0000011404E49C10>
+    │                                       └ True
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1386, in _retryable_write
+    return self._retry_with_session(retryable, func, s, None)
+           │    │                   │          │     └ <pymongo.client_session.ClientSession object at 0x0000011404E5B250>
+           │    │                   │          └ <function Collection._insert_one.<locals>._insert_command at 0x0000011404E49C10>
+           │    │                   └ True
+           │    └ <function MongoClient._retry_with_session at 0x0000011404C6AAF0>
+           └ MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True)
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1274, in _retry_with_session
+    return self._retry_internal(retryable, func, session, bulk)
+           │    │               │          │     │        └ None
+           │    │               │          │     └ <pymongo.client_session.ClientSession object at 0x0000011404E5B250>
+           │    │               │          └ <function Collection._insert_one.<locals>._insert_command at 0x0000011404E49C10>
+           │    │               └ True
+           │    └ <function MongoClient._retry_internal at 0x0000011404C6AB80>
+           └ MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True)
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1307, in _retry_internal
+    return func(session, sock_info, retryable)
+           │    │        │          └ False
+           │    │        └ SocketInfo(<socket.socket fd=2172, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 59...
+           │    └ <pymongo.client_session.ClientSession object at 0x0000011404E5B250>
+           └ <function Collection._insert_one.<locals>._insert_command at 0x0000011404E49C10>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 492, in _insert_command
+    _check_write_command_response(result)
+    │                             └ {'n': 0, 'writeErrors': [{'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': ...
+    └ <function _check_write_command_response at 0x00000114046FCC10>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\helpers.py", line 217, in _check_write_command_response
+    _raise_last_write_error(write_errors)
+    │                       └ [{'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNa...
+    └ <function _raise_last_write_error at 0x00000114046FCA60>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\helpers.py", line 189, in _raise_last_write_error
+    raise DuplicateKeyError(error.get("errmsg"), 11000, error)
+          │                 │     │                     └ {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNam...
+          │                 │     └ <method 'get' of 'dict' objects>
+          │                 └ {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNam...
+          └ <class 'pymongo.errors.DuplicateKeyError'>
+
+pymongo.errors.DuplicateKeyError: E11000 duplicate key error collection: weather.city_geography_msg index: uniqueIndex dup key: { cityNameAlias: "washoe county", stateNameAlias: "nevada", countryAlias: "us" }, full error: {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNameAlias': 'washoe county', 'stateNameAlias': 'nevada', 'countryAlias': 'us'}, 'errmsg': 'E11000 duplicate key error collection: weather.city_geography_msg index: uniqueIndex dup key: { cityNameAlias: "washoe county", stateNameAlias: "nevada", countryAlias: "us" }'}
+2022-03-15 16:15:36.098 | ERROR    | __main__:<module>:105 - insert data failed, dataMsg: {'cityName': 'Compton', 'stateName': 'CA', 'country': 'United States', 'cityNameAlias': 'compton', 'stateNameAlias': 'ca', 'countryAlias': 'united states', 'longitude': None, 'latitude': None, 'isValidGeographicMsg': 'true', 'createdTime': datetime.datetime(2021, 8, 17, 7, 45, 19), 'updatedTime': datetime.datetime(2021, 8, 17, 7, 45, 19), '_class': 'com.etekcity.cloud.openweatherservice.dto.mongodb.CityGeographyMsg', '_id': ObjectId('62304b28a8b9a4d4b1e423ba')}, exception:
+Traceback (most recent call last):
+
+> File "D:/pythonproject/maq.py", line 103, in <module>
+    geographyDB.insert_one(insert_data)
+    │           │          └ {'cityName': 'Compton', 'stateName': 'CA', 'country': 'United States', 'cityNameAlias': 'compton', 'stateNameAlias': 'ca', 'c...
+    │           └ <function Collection.insert_one at 0x0000011404BC20D0>
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 542, in insert_one
+    self._insert_one(
+    │    └ <function Collection._insert_one at 0x0000011404BC2040>
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 494, in _insert_one
+    self.__database.client._retryable_write(acknowledged, _insert_command, session)
+    │                                       │             │                └ None
+    │                                       │             └ <function Collection._insert_one.<locals>._insert_command at 0x0000011404E49D30>
+    │                                       └ True
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1386, in _retryable_write
+    return self._retry_with_session(retryable, func, s, None)
+           │    │                   │          │     └ <pymongo.client_session.ClientSession object at 0x0000011404E5B430>
+           │    │                   │          └ <function Collection._insert_one.<locals>._insert_command at 0x0000011404E49D30>
+           │    │                   └ True
+           │    └ <function MongoClient._retry_with_session at 0x0000011404C6AAF0>
+           └ MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True)
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1274, in _retry_with_session
+    return self._retry_internal(retryable, func, session, bulk)
+           │    │               │          │     │        └ None
+           │    │               │          │     └ <pymongo.client_session.ClientSession object at 0x0000011404E5B430>
+           │    │               │          └ <function Collection._insert_one.<locals>._insert_command at 0x0000011404E49D30>
+           │    │               └ True
+           │    └ <function MongoClient._retry_internal at 0x0000011404C6AB80>
+           └ MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True)
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1307, in _retry_internal
+    return func(session, sock_info, retryable)
+           │    │        │          └ False
+           │    │        └ SocketInfo(<socket.socket fd=2172, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 59...
+           │    └ <pymongo.client_session.ClientSession object at 0x0000011404E5B430>
+           └ <function Collection._insert_one.<locals>._insert_command at 0x0000011404E49D30>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 492, in _insert_command
+    _check_write_command_response(result)
+    │                             └ {'n': 0, 'writeErrors': [{'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': ...
+    └ <function _check_write_command_response at 0x00000114046FCC10>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\helpers.py", line 217, in _check_write_command_response
+    _raise_last_write_error(write_errors)
+    │                       └ [{'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNa...
+    └ <function _raise_last_write_error at 0x00000114046FCA60>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\helpers.py", line 189, in _raise_last_write_error
+    raise DuplicateKeyError(error.get("errmsg"), 11000, error)
+          │                 │     │                     └ {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNam...
+          │                 │     └ <method 'get' of 'dict' objects>
+          │                 └ {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNam...
+          └ <class 'pymongo.errors.DuplicateKeyError'>
+
+pymongo.errors.DuplicateKeyError: E11000 duplicate key error collection: weather.city_geography_msg index: uniqueIndex dup key: { cityNameAlias: "compton", stateNameAlias: "ca", countryAlias: "united states" }, full error: {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNameAlias': 'compton', 'stateNameAlias': 'ca', 'countryAlias': 'united states'}, 'errmsg': 'E11000 duplicate key error collection: weather.city_geography_msg index: uniqueIndex dup key: { cityNameAlias: "compton", stateNameAlias: "ca", countryAlias: "united states" }'}
+2022-03-15 16:15:36.113 | ERROR    | __main__:<module>:105 - insert data failed, dataMsg: {'cityName': 'Fresno', 'stateName': 'California', 'country': 'United States', 'cityNameAlias': 'fresno', 'stateNameAlias': 'california', 'countryAlias': 'united states', 'longitude': '-119.786500', 'latitude': '36.740900', 'isValidGeographicMsg': 'true', 'createdTime': datetime.datetime(2021, 8, 24, 7, 40, 42), 'updatedTime': datetime.datetime(2021, 8, 24, 7, 40, 42), '_class': 'com.etekcity.cloud.openweatherservice.dto.mongodb.CityGeographyMsg', '_id': ObjectId('62304b28a8b9a4d4b1e423bb')}, exception:
+Traceback (most recent call last):
+
+> File "D:/pythonproject/maq.py", line 103, in <module>
+    geographyDB.insert_one(insert_data)
+    │           │          └ {'cityName': 'Fresno', 'stateName': 'California', 'country': 'United States', 'cityNameAlias': 'fresno', 'stateNameAlias': 'c...
+    │           └ <function Collection.insert_one at 0x0000011404BC20D0>
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 542, in insert_one
+    self._insert_one(
+    │    └ <function Collection._insert_one at 0x0000011404BC2040>
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 494, in _insert_one
+    self.__database.client._retryable_write(acknowledged, _insert_command, session)
+    │                                       │             │                └ None
+    │                                       │             └ <function Collection._insert_one.<locals>._insert_command at 0x0000011404E49E50>
+    │                                       └ True
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1386, in _retryable_write
+    return self._retry_with_session(retryable, func, s, None)
+           │    │                   │          │     └ <pymongo.client_session.ClientSession object at 0x0000011404E5B700>
+           │    │                   │          └ <function Collection._insert_one.<locals>._insert_command at 0x0000011404E49E50>
+           │    │                   └ True
+           │    └ <function MongoClient._retry_with_session at 0x0000011404C6AAF0>
+           └ MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True)
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1274, in _retry_with_session
+    return self._retry_internal(retryable, func, session, bulk)
+           │    │               │          │     │        └ None
+           │    │               │          │     └ <pymongo.client_session.ClientSession object at 0x0000011404E5B700>
+           │    │               │          └ <function Collection._insert_one.<locals>._insert_command at 0x0000011404E49E50>
+           │    │               └ True
+           │    └ <function MongoClient._retry_internal at 0x0000011404C6AB80>
+           └ MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True)
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1307, in _retry_internal
+    return func(session, sock_info, retryable)
+           │    │        │          └ False
+           │    │        └ SocketInfo(<socket.socket fd=2172, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 59...
+           │    └ <pymongo.client_session.ClientSession object at 0x0000011404E5B700>
+           └ <function Collection._insert_one.<locals>._insert_command at 0x0000011404E49E50>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 492, in _insert_command
+    _check_write_command_response(result)
+    │                             └ {'n': 0, 'writeErrors': [{'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': ...
+    └ <function _check_write_command_response at 0x00000114046FCC10>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\helpers.py", line 217, in _check_write_command_response
+    _raise_last_write_error(write_errors)
+    │                       └ [{'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNa...
+    └ <function _raise_last_write_error at 0x00000114046FCA60>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\helpers.py", line 189, in _raise_last_write_error
+    raise DuplicateKeyError(error.get("errmsg"), 11000, error)
+          │                 │     │                     └ {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNam...
+          │                 │     └ <method 'get' of 'dict' objects>
+          │                 └ {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNam...
+          └ <class 'pymongo.errors.DuplicateKeyError'>
+
+pymongo.errors.DuplicateKeyError: E11000 duplicate key error collection: weather.city_geography_msg index: uniqueIndex dup key: { cityNameAlias: "fresno", stateNameAlias: "california", countryAlias: "united states" }, full error: {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNameAlias': 'fresno', 'stateNameAlias': 'california', 'countryAlias': 'united states'}, 'errmsg': 'E11000 duplicate key error collection: weather.city_geography_msg index: uniqueIndex dup key: { cityNameAlias: "fresno", stateNameAlias: "california", countryAlias: "united states" }'}
+2022-03-15 16:15:36.129 | ERROR    | __main__:<module>:105 - insert data failed, dataMsg: {'cityName': 'St. Louis', 'stateName': 'California', 'country': 'United States', 'cityNameAlias': 'st. louis', 'stateNameAlias': 'california', 'countryAlias': 'united states', 'longitude': '-90.134625', 'latitude': '38.632784', 'isValidGeographicMsg': 'true', 'createdTime': datetime.datetime(2021, 8, 25, 2, 34, 58), 'updatedTime': datetime.datetime(2021, 8, 25, 2, 34, 58), '_class': 'com.etekcity.cloud.openweatherservice.dto.mongodb.CityGeographyMsg', '_id': ObjectId('62304b28a8b9a4d4b1e423bc')}, exception:
+Traceback (most recent call last):
+
+> File "D:/pythonproject/maq.py", line 103, in <module>
+    geographyDB.insert_one(insert_data)
+    │           │          └ {'cityName': 'St. Louis', 'stateName': 'California', 'country': 'United States', 'cityNameAlias': 'st. louis', 'stateNameAlia...
+    │           └ <function Collection.insert_one at 0x0000011404BC20D0>
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 542, in insert_one
+    self._insert_one(
+    │    └ <function Collection._insert_one at 0x0000011404BC2040>
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 494, in _insert_one
+    self.__database.client._retryable_write(acknowledged, _insert_command, session)
+    │                                       │             │                └ None
+    │                                       │             └ <function Collection._insert_one.<locals>._insert_command at 0x0000011404E49AF0>
+    │                                       └ True
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1386, in _retryable_write
+    return self._retry_with_session(retryable, func, s, None)
+           │    │                   │          │     └ <pymongo.client_session.ClientSession object at 0x0000011404E5B9D0>
+           │    │                   │          └ <function Collection._insert_one.<locals>._insert_command at 0x0000011404E49AF0>
+           │    │                   └ True
+           │    └ <function MongoClient._retry_with_session at 0x0000011404C6AAF0>
+           └ MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True)
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1274, in _retry_with_session
+    return self._retry_internal(retryable, func, session, bulk)
+           │    │               │          │     │        └ None
+           │    │               │          │     └ <pymongo.client_session.ClientSession object at 0x0000011404E5B9D0>
+           │    │               │          └ <function Collection._insert_one.<locals>._insert_command at 0x0000011404E49AF0>
+           │    │               └ True
+           │    └ <function MongoClient._retry_internal at 0x0000011404C6AB80>
+           └ MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True)
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1307, in _retry_internal
+    return func(session, sock_info, retryable)
+           │    │        │          └ False
+           │    │        └ SocketInfo(<socket.socket fd=2172, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 59...
+           │    └ <pymongo.client_session.ClientSession object at 0x0000011404E5B9D0>
+           └ <function Collection._insert_one.<locals>._insert_command at 0x0000011404E49AF0>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 492, in _insert_command
+    _check_write_command_response(result)
+    │                             └ {'n': 0, 'writeErrors': [{'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': ...
+    └ <function _check_write_command_response at 0x00000114046FCC10>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\helpers.py", line 217, in _check_write_command_response
+    _raise_last_write_error(write_errors)
+    │                       └ [{'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNa...
+    └ <function _raise_last_write_error at 0x00000114046FCA60>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\helpers.py", line 189, in _raise_last_write_error
+    raise DuplicateKeyError(error.get("errmsg"), 11000, error)
+          │                 │     │                     └ {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNam...
+          │                 │     └ <method 'get' of 'dict' objects>
+          │                 └ {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNam...
+          └ <class 'pymongo.errors.DuplicateKeyError'>
+
+pymongo.errors.DuplicateKeyError: E11000 duplicate key error collection: weather.city_geography_msg index: uniqueIndex dup key: { cityNameAlias: "st. louis", stateNameAlias: "california", countryAlias: "united states" }, full error: {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNameAlias': 'st. louis', 'stateNameAlias': 'california', 'countryAlias': 'united states'}, 'errmsg': 'E11000 duplicate key error collection: weather.city_geography_msg index: uniqueIndex dup key: { cityNameAlias: "st. louis", stateNameAlias: "california", countryAlias: "united states" }'}
+2022-03-15 16:15:36.145 | ERROR    | __main__:<module>:105 - insert data failed, dataMsg: {'cityName': 'Compton', 'stateName': 'California', 'country': 'United States', 'cityNameAlias': 'compton', 'stateNameAlias': 'california', 'countryAlias': 'united states', 'longitude': '-118.219751', 'latitude': '33.896671', 'isValidGeographicMsg': 'true', 'createdTime': datetime.datetime(2021, 8, 25, 2, 35, 5), 'updatedTime': datetime.datetime(2021, 8, 25, 2, 35, 5), '_class': 'com.etekcity.cloud.openweatherservice.dto.mongodb.CityGeographyMsg', '_id': ObjectId('62304b28a8b9a4d4b1e423bd')}, exception:
+Traceback (most recent call last):
+
+> File "D:/pythonproject/maq.py", line 103, in <module>
+    geographyDB.insert_one(insert_data)
+    │           │          └ {'cityName': 'Compton', 'stateName': 'California', 'country': 'United States', 'cityNameAlias': 'compton', 'stateNameAlias': ...
+    │           └ <function Collection.insert_one at 0x0000011404BC20D0>
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 542, in insert_one
+    self._insert_one(
+    │    └ <function Collection._insert_one at 0x0000011404BC2040>
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 494, in _insert_one
+    self.__database.client._retryable_write(acknowledged, _insert_command, session)
+    │                                       │             │                └ None
+    │                                       │             └ <function Collection._insert_one.<locals>._insert_command at 0x0000011404E49EE0>
+    │                                       └ True
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1386, in _retryable_write
+    return self._retry_with_session(retryable, func, s, None)
+           │    │                   │          │     └ <pymongo.client_session.ClientSession object at 0x0000011404E5BCA0>
+           │    │                   │          └ <function Collection._insert_one.<locals>._insert_command at 0x0000011404E49EE0>
+           │    │                   └ True
+           │    └ <function MongoClient._retry_with_session at 0x0000011404C6AAF0>
+           └ MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True)
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1274, in _retry_with_session
+    return self._retry_internal(retryable, func, session, bulk)
+           │    │               │          │     │        └ None
+           │    │               │          │     └ <pymongo.client_session.ClientSession object at 0x0000011404E5BCA0>
+           │    │               │          └ <function Collection._insert_one.<locals>._insert_command at 0x0000011404E49EE0>
+           │    │               └ True
+           │    └ <function MongoClient._retry_internal at 0x0000011404C6AB80>
+           └ MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True)
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1307, in _retry_internal
+    return func(session, sock_info, retryable)
+           │    │        │          └ False
+           │    │        └ SocketInfo(<socket.socket fd=2172, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 59...
+           │    └ <pymongo.client_session.ClientSession object at 0x0000011404E5BCA0>
+           └ <function Collection._insert_one.<locals>._insert_command at 0x0000011404E49EE0>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 492, in _insert_command
+    _check_write_command_response(result)
+    │                             └ {'n': 0, 'writeErrors': [{'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': ...
+    └ <function _check_write_command_response at 0x00000114046FCC10>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\helpers.py", line 217, in _check_write_command_response
+    _raise_last_write_error(write_errors)
+    │                       └ [{'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNa...
+    └ <function _raise_last_write_error at 0x00000114046FCA60>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\helpers.py", line 189, in _raise_last_write_error
+    raise DuplicateKeyError(error.get("errmsg"), 11000, error)
+          │                 │     │                     └ {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNam...
+          │                 │     └ <method 'get' of 'dict' objects>
+          │                 └ {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNam...
+          └ <class 'pymongo.errors.DuplicateKeyError'>
+
+pymongo.errors.DuplicateKeyError: E11000 duplicate key error collection: weather.city_geography_msg index: uniqueIndex dup key: { cityNameAlias: "compton", stateNameAlias: "california", countryAlias: "united states" }, full error: {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNameAlias': 'compton', 'stateNameAlias': 'california', 'countryAlias': 'united states'}, 'errmsg': 'E11000 duplicate key error collection: weather.city_geography_msg index: uniqueIndex dup key: { cityNameAlias: "compton", stateNameAlias: "california", countryAlias: "united states" }'}
+2022-03-15 16:15:36.162 | ERROR    | __main__:<module>:105 - insert data failed, dataMsg: {'cityName': 'MUDDY', 'stateName': 'California', 'country': 'United States', 'cityNameAlias': 'muddy', 'stateNameAlias': 'california', 'countryAlias': 'united states', 'longitude': '-146.088000', 'latitude': '64.990822', 'isValidGeographicMsg': 'true', 'createdTime': datetime.datetime(2021, 9, 17, 7, 48, 16), 'updatedTime': datetime.datetime(2021, 9, 17, 7, 48, 16), '_class': 'com.etekcity.cloud.openweatherservice.dto.mongodb.CityGeographyMsg', '_id': ObjectId('62304b28a8b9a4d4b1e423be')}, exception:
+Traceback (most recent call last):
+
+> File "D:/pythonproject/maq.py", line 103, in <module>
+    geographyDB.insert_one(insert_data)
+    │           │          └ {'cityName': 'MUDDY', 'stateName': 'California', 'country': 'United States', 'cityNameAlias': 'muddy', 'stateNameAlias': 'cal...
+    │           └ <function Collection.insert_one at 0x0000011404BC20D0>
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 542, in insert_one
+    self._insert_one(
+    │    └ <function Collection._insert_one at 0x0000011404BC2040>
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 494, in _insert_one
+    self.__database.client._retryable_write(acknowledged, _insert_command, session)
+    │                                       │             │                └ None
+    │                                       │             └ <function Collection._insert_one.<locals>._insert_command at 0x0000011404E6D0D0>
+    │                                       └ True
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1386, in _retryable_write
+    return self._retry_with_session(retryable, func, s, None)
+           │    │                   │          │     └ <pymongo.client_session.ClientSession object at 0x0000011404E820A0>
+           │    │                   │          └ <function Collection._insert_one.<locals>._insert_command at 0x0000011404E6D0D0>
+           │    │                   └ True
+           │    └ <function MongoClient._retry_with_session at 0x0000011404C6AAF0>
+           └ MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True)
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1274, in _retry_with_session
+    return self._retry_internal(retryable, func, session, bulk)
+           │    │               │          │     │        └ None
+           │    │               │          │     └ <pymongo.client_session.ClientSession object at 0x0000011404E820A0>
+           │    │               │          └ <function Collection._insert_one.<locals>._insert_command at 0x0000011404E6D0D0>
+           │    │               └ True
+           │    └ <function MongoClient._retry_internal at 0x0000011404C6AB80>
+           └ MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True)
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1307, in _retry_internal
+    return func(session, sock_info, retryable)
+           │    │        │          └ False
+           │    │        └ SocketInfo(<socket.socket fd=2172, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 59...
+           │    └ <pymongo.client_session.ClientSession object at 0x0000011404E820A0>
+           └ <function Collection._insert_one.<locals>._insert_command at 0x0000011404E6D0D0>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 492, in _insert_command
+    _check_write_command_response(result)
+    │                             └ {'n': 0, 'writeErrors': [{'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': ...
+    └ <function _check_write_command_response at 0x00000114046FCC10>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\helpers.py", line 217, in _check_write_command_response
+    _raise_last_write_error(write_errors)
+    │                       └ [{'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNa...
+    └ <function _raise_last_write_error at 0x00000114046FCA60>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\helpers.py", line 189, in _raise_last_write_error
+    raise DuplicateKeyError(error.get("errmsg"), 11000, error)
+          │                 │     │                     └ {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNam...
+          │                 │     └ <method 'get' of 'dict' objects>
+          │                 └ {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNam...
+          └ <class 'pymongo.errors.DuplicateKeyError'>
+
+pymongo.errors.DuplicateKeyError: E11000 duplicate key error collection: weather.city_geography_msg index: uniqueIndex dup key: { cityNameAlias: "muddy", stateNameAlias: "california", countryAlias: "united states" }, full error: {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNameAlias': 'muddy', 'stateNameAlias': 'california', 'countryAlias': 'united states'}, 'errmsg': 'E11000 duplicate key error collection: weather.city_geography_msg index: uniqueIndex dup key: { cityNameAlias: "muddy", stateNameAlias: "california", countryAlias: "united states" }'}
+2022-03-15 16:15:36.177 | ERROR    | __main__:<module>:105 - insert data failed, dataMsg: {'cityName': '宝安区', 'stateName': '广东省', 'country': 'CN', 'cityNameAlias': '宝安区', 'stateNameAlias': '广东省', 'countryAlias': 'cn', 'longitude': '113.825466', 'latitude': '22.685468', 'isValidGeographicMsg': 'true', 'createdTime': datetime.datetime(2021, 11, 1, 11, 34, 56), 'updatedTime': datetime.datetime(2021, 11, 1, 11, 34, 56), '_class': 'com.etekcity.cloud.openweatherservice.dto.mongodb.CityGeographyMsg', '_id': ObjectId('62304b28a8b9a4d4b1e423bf')}, exception:
+Traceback (most recent call last):
+
+> File "D:/pythonproject/maq.py", line 103, in <module>
+    geographyDB.insert_one(insert_data)
+    │           │          └ {'cityName': '宝安区', 'stateName': '广东省', 'country': 'CN', 'cityNameAlias': '宝安区', 'stateNameAlias': '广东省', 'countryAlias': 'cn...
+    │           └ <function Collection.insert_one at 0x0000011404BC20D0>
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 542, in insert_one
+    self._insert_one(
+    │    └ <function Collection._insert_one at 0x0000011404BC2040>
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 494, in _insert_one
+    self.__database.client._retryable_write(acknowledged, _insert_command, session)
+    │                                       │             │                └ None
+    │                                       │             └ <function Collection._insert_one.<locals>._insert_command at 0x0000011404E6D310>
+    │                                       └ True
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1386, in _retryable_write
+    return self._retry_with_session(retryable, func, s, None)
+           │    │                   │          │     └ <pymongo.client_session.ClientSession object at 0x0000011404E82280>
+           │    │                   │          └ <function Collection._insert_one.<locals>._insert_command at 0x0000011404E6D310>
+           │    │                   └ True
+           │    └ <function MongoClient._retry_with_session at 0x0000011404C6AAF0>
+           └ MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True)
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1274, in _retry_with_session
+    return self._retry_internal(retryable, func, session, bulk)
+           │    │               │          │     │        └ None
+           │    │               │          │     └ <pymongo.client_session.ClientSession object at 0x0000011404E82280>
+           │    │               │          └ <function Collection._insert_one.<locals>._insert_command at 0x0000011404E6D310>
+           │    │               └ True
+           │    └ <function MongoClient._retry_internal at 0x0000011404C6AB80>
+           └ MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True)
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1307, in _retry_internal
+    return func(session, sock_info, retryable)
+           │    │        │          └ False
+           │    │        └ SocketInfo(<socket.socket fd=2172, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 59...
+           │    └ <pymongo.client_session.ClientSession object at 0x0000011404E82280>
+           └ <function Collection._insert_one.<locals>._insert_command at 0x0000011404E6D310>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 492, in _insert_command
+    _check_write_command_response(result)
+    │                             └ {'n': 0, 'writeErrors': [{'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': ...
+    └ <function _check_write_command_response at 0x00000114046FCC10>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\helpers.py", line 217, in _check_write_command_response
+    _raise_last_write_error(write_errors)
+    │                       └ [{'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNa...
+    └ <function _raise_last_write_error at 0x00000114046FCA60>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\helpers.py", line 189, in _raise_last_write_error
+    raise DuplicateKeyError(error.get("errmsg"), 11000, error)
+          │                 │     │                     └ {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNam...
+          │                 │     └ <method 'get' of 'dict' objects>
+          │                 └ {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNam...
+          └ <class 'pymongo.errors.DuplicateKeyError'>
+
+pymongo.errors.DuplicateKeyError: E11000 duplicate key error collection: weather.city_geography_msg index: uniqueIndex dup key: { cityNameAlias: "宝安区", stateNameAlias: "广东省", countryAlias: "cn" }, full error: {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNameAlias': '宝安区', 'stateNameAlias': '广东省', 'countryAlias': 'cn'}, 'errmsg': 'E11000 duplicate key error collection: weather.city_geography_msg index: uniqueIndex dup key: { cityNameAlias: "宝安区", stateNameAlias: "广东省", countryAlias: "cn" }'}
+2022-03-15 16:15:36.193 | ERROR    | __main__:<module>:105 - insert data failed, dataMsg: {'cityName': 'Chongqing', 'stateName': 'Chongqing', 'country': 'CN', 'cityNameAlias': 'chongqing', 'stateNameAlias': 'chongqing', 'countryAlias': 'cn', 'longitude': '106.583719', 'latitude': '29.568325', 'isValidGeographicMsg': 'true', 'createdTime': datetime.datetime(2022, 1, 5, 6, 41, 17), 'updatedTime': datetime.datetime(2022, 1, 5, 6, 41, 17), '_class': 'com.etekcity.cloud.openweatherservice.dto.mongodb.CityGeographyMsg', '_id': ObjectId('62304b28a8b9a4d4b1e423c0')}, exception:
+Traceback (most recent call last):
+
+> File "D:/pythonproject/maq.py", line 103, in <module>
+    geographyDB.insert_one(insert_data)
+    │           │          └ {'cityName': 'Chongqing', 'stateName': 'Chongqing', 'country': 'CN', 'cityNameAlias': 'chongqing', 'stateNameAlias': 'chongqi...
+    │           └ <function Collection.insert_one at 0x0000011404BC20D0>
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 542, in insert_one
+    self._insert_one(
+    │    └ <function Collection._insert_one at 0x0000011404BC2040>
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 494, in _insert_one
+    self.__database.client._retryable_write(acknowledged, _insert_command, session)
+    │                                       │             │                └ None
+    │                                       │             └ <function Collection._insert_one.<locals>._insert_command at 0x0000011404E6D430>
+    │                                       └ True
+    └ Collection(Database(MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True), 'weather'), 'ci...
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1386, in _retryable_write
+    return self._retry_with_session(retryable, func, s, None)
+           │    │                   │          │     └ <pymongo.client_session.ClientSession object at 0x0000011404E82550>
+           │    │                   │          └ <function Collection._insert_one.<locals>._insert_command at 0x0000011404E6D430>
+           │    │                   └ True
+           │    └ <function MongoClient._retry_with_session at 0x0000011404C6AAF0>
+           └ MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True)
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1274, in _retry_with_session
+    return self._retry_internal(retryable, func, session, bulk)
+           │    │               │          │     │        └ None
+           │    │               │          │     └ <pymongo.client_session.ClientSession object at 0x0000011404E82550>
+           │    │               │          └ <function Collection._insert_one.<locals>._insert_command at 0x0000011404E6D430>
+           │    │               └ True
+           │    └ <function MongoClient._retry_internal at 0x0000011404C6AB80>
+           └ MongoClient(host=['127.0.0.1:27017'], document_class=dict, tz_aware=False, connect=True)
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\mongo_client.py", line 1307, in _retry_internal
+    return func(session, sock_info, retryable)
+           │    │        │          └ False
+           │    │        └ SocketInfo(<socket.socket fd=2172, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 59...
+           │    └ <pymongo.client_session.ClientSession object at 0x0000011404E82550>
+           └ <function Collection._insert_one.<locals>._insert_command at 0x0000011404E6D430>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\collection.py", line 492, in _insert_command
+    _check_write_command_response(result)
+    │                             └ {'n': 0, 'writeErrors': [{'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': ...
+    └ <function _check_write_command_response at 0x00000114046FCC10>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\helpers.py", line 217, in _check_write_command_response
+    _raise_last_write_error(write_errors)
+    │                       └ [{'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNa...
+    └ <function _raise_last_write_error at 0x00000114046FCA60>
+
+  File "D:\pythonproject\venv\lib\site-packages\pymongo\helpers.py", line 189, in _raise_last_write_error
+    raise DuplicateKeyError(error.get("errmsg"), 11000, error)
+          │                 │     │                     └ {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNam...
+          │                 │     └ <method 'get' of 'dict' objects>
+          │                 └ {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNam...
+          └ <class 'pymongo.errors.DuplicateKeyError'>
+
+pymongo.errors.DuplicateKeyError: E11000 duplicate key error collection: weather.city_geography_msg index: uniqueIndex dup key: { cityNameAlias: "chongqing", stateNameAlias: "chongqing", countryAlias: "cn" }, full error: {'index': 0, 'code': 11000, 'keyPattern': {'cityNameAlias': 1, 'stateNameAlias': 1, 'countryAlias': 1}, 'keyValue': {'cityNameAlias': 'chongqing', 'stateNameAlias': 'chongqing', 'countryAlias': 'cn'}, 'errmsg': 'E11000 duplicate key error collection: weather.city_geography_msg index: uniqueIndex dup key: { cityNameAlias: "chongqing", stateNameAlias: "chongqing", countryAlias: "cn" }'}
+2022-03-15 16:15:36.207 | INFO     | __main__:<module>:109 - syncNotDistinctCityMessage success,endTime:2022-03-15 16:15:36.207638
+2022-03-15 16:15:36.261 | INFO     | __main__:<module>:115 - query data complete, repeat city total size: 8
+2022-03-15 16:15:36.313 | INFO     | __main__:<module>:121 - select_city_query , city total size: 16
+2022-03-15 16:16:04.299 | INFO     | __main__:<module>:31 - start-syncDistinctCityMessage-time: 2022-03-15 16:16:04.299024
+2022-03-15 16:16:04.350 | INFO     | __main__:<module>:39 - query distinctByUpdateTime data complete, city total size: 3
+2022-03-15 16:16:04.354 | INFO     | __main__:<module>:69 - syncDistinctCityMessage success,endTime:2022-03-15 16:16:04.354875
+2022-03-15 16:16:04.354 | INFO     | __main__:<module>:71 - start-syncNotDistinctCityMessage-time: 2022-03-15 16:16:04.354875
+2022-03-15 16:16:04.407 | INFO     | __main__:<module>:78 - query data no distinct complete, city total size: 8
+2022-03-15 16:16:04.412 | INFO     | __main__:<module>:109 - syncNotDistinctCityMessage success,endTime:2022-03-15 16:16:04.412483
+2022-03-15 16:16:04.460 | INFO     | __main__:<module>:115 - query data complete, repeat city total size: 8
+2022-03-15 16:16:04.514 | INFO     | __main__:<module>:121 - select_city_query , city total size: 16
